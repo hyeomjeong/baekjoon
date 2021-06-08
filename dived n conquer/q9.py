@@ -55,8 +55,17 @@ if __name__ == '__main__':
         while len(square) > 1:
             s_tree = init(square)
 
+    z = sorted(list(zip(t, r)))
+    customer = {idx: z[idx] for idx in range(num)}
+    # print(customer)
+    answer = [-1 for _ in range(num)]
 
+    for sec in range(num):
+        for idx in range(num):
+            c = customer[idx]
+            if c[0] <= sec:
 
-
+        # 순서확인
+        for
 
 
