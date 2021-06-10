@@ -1,21 +1,19 @@
 from sys import stdin
 from collections import deque
 
-def bfs():
-    colors = [0] * v
-    queue = deque([0])
-    colors[0] = 1
+def bfs(x):
+    queue = deque([x])
+    colors[x] = 1
 
     while queue:
         curr_idx = queue.popleft()
-        for adj_idx in range(v):
-            if adj_idx in graph[curr_idx]:
-                if colors[adj_idx] == 0:
-                    colors[adj_idx] = -colors[curr_idx]
-                    queue.append(adj_idx)
-                elif colors[curr_idx] + colors[adj_idx] != 0:
-                    return "NO"
-    return "YES"
+        for adj in graph[curr_idx]:
+            if colors[adj] == 0:
+                colors[adj] = -colors[curr_idx]
+                queue.append(adj)
+            elif colors[curr_idx] + colors[adj] != 0:
+                return False
+    return True
 
 if __name__ == '__main__':
     k = int(stdin.readline().rstrip())
@@ -26,5 +24,13 @@ if __name__ == '__main__':
             a, b = map(int, stdin.readline().split())
             graph[a-1].append(b-1)
             graph[b-1].append(a-1)
-        print(bfs())
+        res = True
+        colors = [0] * v
+        for idx in range(v):
+            if colors[idx] == 0:
+                if not bfs(idx):
+                    res = False
+                    break
+
+        print("YES" if res else "NO")
 
