@@ -40,6 +40,7 @@ if __name__ == '__main__':
         t_list = [int(stdin.readline().rstrip()) for _ in range(t)]
         result = []
         for tmp in t_list:
+            # inf 관련 처리 해주는 예외가 없어서 계속 틀림 ㅠㅠ,.,.,.,.
             if s_distances[tmp] == float('inf') or g_distances[tmp] == float('inf') or h_distances[tmp] == float('inf'):
                 continue
             gh_total = s_distances[g] + road + h_distances[tmp]
